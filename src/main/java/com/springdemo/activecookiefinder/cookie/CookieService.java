@@ -1,4 +1,4 @@
-package com.example.mycookieproject;
+package com.springdemo.activecookiefinder.cookie;
 
 import org.springframework.stereotype.Service;
 
