@@ -8,16 +8,28 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class CookieService {
+    // Cache to store results for each date
+    private final Map<String, List<String>> cache = new ConcurrentHashMap<>();
 
     public List<String> findMostActiveCookies(String fileName, String date) throws IOException {
+        // Check if the result for the given date is already cached
+        if (cache.containsKey(date)) {
+            return cache.get(date);
+        }
+
         Map<String, Integer> cookieCount = new HashMap<>();
         LocalDate targetDate = LocalDate.parse(date, DateTimeFormatter.ISO_DATE);
 
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
+
+            // Skip the header line
+            reader.readLine();
+
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
                 if (parts.length < 2) continue;
@@ -39,6 +51,9 @@ public class CookieService {
                 mostActiveCookies.add(entry.getKey());
             }
         }
+
+        // Cache the result for the given date
+        cache.put(date, mostActiveCookies);
 
         return mostActiveCookies;
     }
