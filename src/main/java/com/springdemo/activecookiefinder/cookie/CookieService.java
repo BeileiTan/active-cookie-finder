@@ -12,11 +12,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class CookieService {
-    // Cache to store results for each date
     private final Map<String, List<String>> cache = new ConcurrentHashMap<>();
 
     public List<String> findMostActiveCookies(String fileName, String date) throws IOException {
-        // Check if the result for the given date is already cached
         if (cache.containsKey(date)) {
             return cache.get(date);
         }
@@ -26,8 +24,6 @@ public class CookieService {
 
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
-
-            // Skip the header line
             reader.readLine();
 
             while ((line = reader.readLine()) != null) {
@@ -36,6 +32,10 @@ public class CookieService {
 
                 String cookie = parts[0];
                 LocalDate timestampDate = LocalDate.parse(parts[1].substring(0, 10));
+
+                if (timestampDate.isBefore(targetDate)) {
+                    break;
+                }
 
                 if (timestampDate.equals(targetDate)) {
                     cookieCount.put(cookie, cookieCount.getOrDefault(cookie, 0) + 1);
