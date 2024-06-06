@@ -45,17 +45,21 @@ active-cookie-finder
 │   │   │           └── activecookiefinder
 │   │   │               ├── cookie
 │   │   │               │   ├── CookieService.java
-│   │   │               │   └── exception
-│   │   │               │       ├── ObjectNotFoundException.java
-│   │   │               │       └── InvalidDateFormatException.java
-│   │   │               ├── CookieLogApplication.java
+│   │   │               │   └── CookieService.java
+│   │   │               │── system    
+│   │   │               │   ├── exception
+│   │   │               │      ├── InvalidDateFormatException.java
+│   │   │               │      ├── InvalidLogFormatException.java
+│   │   │               │      ├── ObjectNotFoundException.java  
+│   │   │               ├── ActiveCookieFinderApplication.java
 │   ├── test
 │   │   ├── java
 │   │   │   └── com
 │   │   │       └── springdemo
 │   │   │           └── activecookiefinder
-│   │   │               └── CookieLogProcessorTests.java
+│   │   │               └── ActiveCookieFinderApplicationTests.java
 ├── pom.xml
+├── cookie_log.csv
 └── README.md
 ```
 
