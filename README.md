@@ -35,6 +35,7 @@ This project is a command-line application that processes a cookie log file and 
 
 
 ## Project Structure
+```
 active-cookie-finder
 ├── src
 │   ├── main
@@ -56,6 +57,7 @@ active-cookie-finder
 │   │   │               └── CookieLogProcessorTests.java
 ├── pom.xml
 └── README.md
+```
 
 ## Handling Errors
 The application provides meaningful error messages for various scenarios:
